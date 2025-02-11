@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "./_components/Navbar";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,11 +27,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-b min-h-svh text-bg-stone-950`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-b from-gray-50 to-gray-200 min-h-svh text-gray-900`}
       >
-  <div className="max-w-4xl mx-auto p-8"> 
-          {children}
-        </div>
+        <UserProvider>
+          <Navbar />
+          <div className="max-w-6xl mx-auto p-8">{children}</div>
+        </UserProvider>
       </body>
     </html>
   );
